@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:base="clr-namespace:NatureOfCode.Base;assembly=NatureOfCode.Base"
+        xmlns:base="clr-namespace:NatureOfCode.Base.UI;assembly=NatureOfCode.Base"
         xmlns:local="clr-namespace:NatureOfCode.UI"
         mc:Ignorable="d"
 		Loaded="OnLoaded"
@@ -33,15 +33,17 @@
 					</Style>
 				</ItemsControl.ItemContainerStyle>
 				<ItemsControl.Resources>
-					<DataTemplate DataType="{x:Type base:CanvasPoint}">
+					<DataTemplate DataType="{x:Type base:CanvasCircle}">
 						<Ellipse Width="{Binding Radius}"
 								 Height="{Binding Radius}"
-								 Fill="{Binding Color}" />
+								 Fill="{Binding Color}"
+								 Opacity="{Binding Opacity}" />
 					</DataTemplate>
-					<DataTemplate DataType="{x:Type base:CanvasRect}">
+					<DataTemplate DataType="{x:Type base:CanvasRectangle}">
 						<Rectangle Width="{Binding Width}"
 								   Height="{Binding Height}"
-								   Fill="{Binding Color}" />
+								   Fill="{Binding Color}"
+								   Opacity="{Binding Opacity}" />
 					</DataTemplate>
 				</ItemsControl.Resources>
 			</ItemsControl>

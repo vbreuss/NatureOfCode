@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
+using NatureOfCode.Base.Internals;
 
 namespace NatureOfCode.Base
 {
@@ -28,6 +29,8 @@ namespace NatureOfCode.Base
                 OnPropertyChanged();
             }
         }
+
+        public IRandom Random { get; } = new RandomProvider();
 
         public void CreateCanvas(int width, int height, Brush? background = null)
         {

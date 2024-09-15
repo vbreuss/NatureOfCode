@@ -5,7 +5,7 @@ public class Example0_3 : Sketch
     public Example0_3()
         : base("Example 0.3: A Walker That Tends to Move to the Right")
     {
-        _walker = new Walker(Canvas);
+        _walker = new Walker(Canvas, Random);
     }
 
     Walker _walker;
@@ -21,23 +21,25 @@ public class Example0_3 : Sketch
         public double X;
         public double Y;
 
-        public Walker(ICanvas canvas)
+        public Walker(ICanvas canvas, IRandom random)
         {
             Canvas = canvas;
+            Random = random;
             X = canvas.Width / 2.0;
             Y = canvas.Height / 2.0;
         }
 
         public ICanvas Canvas { get; }
+        public IRandom Random { get; }
 
         internal void Show()
         {
-            Canvas.Point(X, Y);
+            Canvas.Circle(X, Y);
         }
 
         internal void Step()
         {
-            var choice = new Random().NextDouble();
+            var choice = Random.Next();
             if (choice < 0.4)
             {
                 X++;

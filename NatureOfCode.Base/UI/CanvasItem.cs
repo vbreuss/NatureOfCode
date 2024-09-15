@@ -1,4 +1,4 @@
-﻿namespace NatureOfCode.Base
+﻿namespace NatureOfCode.Base.UI
 {
     public class CanvasItem : ICanvasItem
     {

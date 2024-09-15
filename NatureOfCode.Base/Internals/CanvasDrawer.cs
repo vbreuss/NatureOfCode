@@ -1,13 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using NatureOfCode.Base.UI;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
-namespace NatureOfCode.Base
+namespace NatureOfCode.Base.Internals
 {
-
-    public class CanvasDrawer : ICanvas, INotifyPropertyChanged
+    internal class CanvasDrawer : ICanvas, INotifyPropertyChanged
     {
         private double _width;
         private double _height;
@@ -51,15 +50,14 @@ namespace NatureOfCode.Base
             }
         }
 
-        public void Point(double x, double y, double radius = 1.0, Brush? color = null)
+        public void Circle(double x, double y, double radius = 1.0, Brush? color = null, double opacity = 1.0)
         {
-            ItemsToDraw.Add(new CanvasPoint(x, y, radius, color));
+            ItemsToDraw.Add(new CanvasCircle(x, y, radius, color, opacity));
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string? name = null)
+        public void Rectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            ItemsToDraw.Add(new CanvasRectangle(x, y, width, height, color, opacity));
         }
 
         public void Reset(Brush? color = null)
@@ -71,9 +69,10 @@ namespace NatureOfCode.Base
             }
         }
 
-        public void Rect(double x, double y, double width, double height, Brush? color = null)
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string? name = null)
         {
-            ItemsToDraw.Add(new CanvasRect(x, y, width, height, color));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

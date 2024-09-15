@@ -27,7 +27,7 @@ public class Example0_5 : Sketch
         var w = Canvas.Width / RandomCounts.Length;
         for (int i = 0; i < Total; i++)
         {
-            Canvas.Rectangle(i * w, Canvas.Height - RandomCounts[i], w - 1, RandomCounts[i]);
+            Canvas.DrawRectangle(i * w, Canvas.Height - RandomCounts[i], w - 1, RandomCounts[i]);
         }
     }
 

@@ -37,7 +37,15 @@ namespace NatureOfCode.Base
             Canvas = new CanvasDrawer(width, height, background);
         }
 
-        public abstract void Draw();
+        public void Reset()
+        {
+            PerlinNoise.Reset();
+            Canvas = new CanvasDrawer(640, 240, null);
+        }
+
+        public virtual void Setup() { }
+
+        public virtual void Draw() { }
 
         public override string ToString()
         {

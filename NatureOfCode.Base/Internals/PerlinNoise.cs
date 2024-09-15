@@ -36,13 +36,18 @@ namespace NatureOfCode.Base.Internals
 
         private static double[] InitializePerlin()
         {
-            var random = new Random();
+            var random = Random.Shared;
             var perlin = new double[PERLIN_SIZE + 1];
             for (var i = 0; i < PERLIN_SIZE + 1; i++)
             {
                 perlin[i] = random.NextDouble();
             }
             return perlin;
+        }
+
+        public static void Reset()
+        {
+            _perlin = new Lazy<double[]>(InitializePerlin);
         }
 
         public static double Noise(double x, double y = 0.0, double z = 0.0)

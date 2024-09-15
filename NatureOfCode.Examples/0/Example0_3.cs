@@ -35,7 +35,7 @@ public class Example0_3 : Sketch
 
         internal void Show()
         {
-            Canvas.Circle(X, Y);
+            Canvas.DrawCircle(X, Y);
         }
 
         internal void Step()

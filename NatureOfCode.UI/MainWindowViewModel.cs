@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 using NatureOfCode.Base;
 
 namespace NatureOfCode.UI
@@ -11,6 +12,16 @@ namespace NatureOfCode.UI
         private Sketch? _sketch;
         private CancellationTokenSource? _sketchCancellation;
         private int delay = 50;
+
+        public ICommand RefreshCommand { get; }
+
+        public MainWindowViewModel()
+        {
+            RefreshCommand = new DelegateCommand(_ =>
+            {
+                RunSketch(Sketch);
+            });
+        }
 
         public int Velocity
         {
@@ -31,18 +42,19 @@ namespace NatureOfCode.UI
                 OnPropertyChanged();
                 if (value != null)
                 {
-                    _sketchCancellation?.Cancel();
-                    _sketchCancellation = new CancellationTokenSource();
-                    var token = _sketchCancellation.Token;
-                    RunSketch(value, token);
+                    RunSketch(value);
                 }
             }
         }
 
         public ObservableCollection<Sketch> Sketches { get; } = new ObservableCollection<Sketch>();
 
-        private void RunSketch(Sketch sketch, CancellationToken cancellationToken)
+        private void RunSketch(Sketch sketch)
         {
+            _sketchCancellation?.Cancel();
+            _sketchCancellation = new CancellationTokenSource();
+            var cancellationToken = _sketchCancellation.Token;
+            sketch.Reset();
             _ = Task.Run(() => 
             {
                 try
@@ -57,6 +69,7 @@ namespace NatureOfCode.UI
         }
         private async Task RunSketchAsync(Sketch sketch, CancellationToken cancellationToken)
         {
+            Application.Current?.Dispatcher.Invoke(sketch.Setup);
             while (!cancellationToken.IsCancellationRequested)
             {
                 try
@@ -99,6 +112,28 @@ namespace NatureOfCode.UI
                 }
             }
             Sketch = Sketches.LastOrDefault();
+        }
+
+        private class DelegateCommand : ICommand
+        {
+            private readonly Action<object?> _execute;
+
+            public DelegateCommand(Action<object?> execute)
+            {
+                _execute = execute;
+            }
+
+            public event EventHandler? CanExecuteChanged;
+
+            public bool CanExecute(object? parameter)
+            {
+                return true;
+            }
+
+            public void Execute(object? parameter)
+            {
+                _execute.Invoke(parameter);
+            }
         }
     }
 }

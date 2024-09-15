@@ -1,8 +1,11 @@
 ﻿using NatureOfCode.Base.UI;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace NatureOfCode.Base.Internals
 {
@@ -50,14 +53,24 @@ namespace NatureOfCode.Base.Internals
             }
         }
 
-        public void Circle(double x, double y, double radius = 1.0, Brush? color = null, double opacity = 1.0)
+        public void DrawCircle(double x, double y, double radius = 1.0, Brush? color = null, double opacity = 1.0)
         {
             ItemsToDraw.Add(new CanvasCircle(x, y, radius, color, opacity));
         }
 
-        public void Rectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0)
+        public void DrawRectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0)
         {
             ItemsToDraw.Add(new CanvasRectangle(x, y, width, height, color, opacity));
+        }
+
+        public void DrawBitmap(Action<WriteableBitmap> value)
+        {
+            WriteableBitmap writeableBmp = BitmapFactory.New((int)Width, (int)Height);
+            using (writeableBmp.GetBitmapContext())
+            {
+                value?.Invoke(writeableBmp);
+            }
+            ItemsToDraw.Add(new CanvasBitmap(writeableBmp));
         }
 
         public void Reset(Brush? color = null)

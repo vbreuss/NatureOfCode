@@ -5,6 +5,7 @@ public class Example0_1 : Sketch
     public Example0_1()
         : base("Example 0.1: A Traditional Random Walk")
     {
+        // Creating the Walker object!
         _walker = new Walker(Canvas, Random);
     }
 

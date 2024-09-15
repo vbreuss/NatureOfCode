@@ -5,6 +5,7 @@ public class Example0_3 : Sketch
     public Example0_3()
         : base("Example 0.3: A Walker That Tends to Move to the Right")
     {
+        // Creating the Walker object!
         _walker = new Walker(Canvas, Random);
     }
 
@@ -40,6 +41,7 @@ public class Example0_3 : Sketch
         internal void Step()
         {
             var choice = Random.Next();
+            // A 40% of moving to the right!
             if (choice < 0.4)
             {
                 X++;

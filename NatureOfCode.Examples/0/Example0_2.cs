@@ -13,6 +13,7 @@ public class Example0_2 : Sketch
     }
 
     const int Total = 20;
+    // An array to keep track of how often random numbers are picked
     int[] RandomCounts;
 
     public override void Draw()
@@ -20,6 +21,7 @@ public class Example0_2 : Sketch
         var index = Random.NextInteger(RandomCounts.Length);
         RandomCounts[index]++;
 
+        // Draw a rectangle to graph results
         Canvas.Reset();
         var w = Canvas.Width / RandomCounts.Length;
 

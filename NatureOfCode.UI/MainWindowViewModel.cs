@@ -10,7 +10,19 @@ namespace NatureOfCode.UI
     {
         private Sketch? _sketch;
         private CancellationTokenSource? _sketchCancellation;
+        private int delay = 50;
 
+        public int Velocity
+        {
+            get => 202 - delay;
+            set
+            {
+                if (value < 200 && value > 0)
+                {
+                    delay = 202 - value;
+                }
+            }
+        }
         public Sketch? Sketch {
             get => _sketch;
             set
@@ -54,7 +66,7 @@ namespace NatureOfCode.UI
                 catch (Exception)
                 {
                 }
-                await Task.Delay(50);
+                await Task.Delay(delay);
             }
         }
 

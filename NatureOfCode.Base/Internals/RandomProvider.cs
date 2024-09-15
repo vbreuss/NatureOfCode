@@ -37,5 +37,10 @@
         {
             return _random.Next(max);
         }
+
+        public double Noise(double x, double y = 0.0, double z = 0.0)
+        {
+            return PerlinNoise.Noise(x, y, z);
+        }
     }
 }

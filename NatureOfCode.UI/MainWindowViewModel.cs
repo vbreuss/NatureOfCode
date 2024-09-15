@@ -98,7 +98,7 @@ namespace NatureOfCode.UI
                         $"Could not instantiate sketch '{type.Name}'!", ex);
                 }
             }
-            Sketch = Sketches.FirstOrDefault();
+            Sketch = Sketches.LastOrDefault();
         }
     }
 }

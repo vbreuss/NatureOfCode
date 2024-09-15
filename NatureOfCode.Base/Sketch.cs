@@ -4,7 +4,6 @@ using System.Windows.Media;
 
 namespace NatureOfCode.Base
 {
-
     public abstract class Sketch : INotifyPropertyChanged
     {
         protected Sketch()

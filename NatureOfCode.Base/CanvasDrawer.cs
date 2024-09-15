@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
@@ -59,6 +60,20 @@ namespace NatureOfCode.Base
         private void OnPropertyChanged([CallerMemberName] string? name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        public void Reset(Brush? color = null)
+        {
+            ItemsToDraw.Clear();
+            if (color != null)
+            {
+                Background = color;
+            }
+        }
+
+        public void Rect(double x, double y, double width, double height, Brush? color = null)
+        {
+            ItemsToDraw.Add(new CanvasRect(x, y, width, height, color));
         }
     }
 }

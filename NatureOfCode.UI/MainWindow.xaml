@@ -32,13 +32,18 @@
 								Value="{Binding Y}"/>
 					</Style>
 				</ItemsControl.ItemContainerStyle>
-				<ItemsControl.ItemTemplate>
+				<ItemsControl.Resources>
 					<DataTemplate DataType="{x:Type base:CanvasPoint}">
 						<Ellipse Width="{Binding Radius}"
 								 Height="{Binding Radius}"
 								 Fill="{Binding Color}" />
 					</DataTemplate>
-				</ItemsControl.ItemTemplate>
+					<DataTemplate DataType="{x:Type base:CanvasRect}">
+						<Rectangle Width="{Binding Width}"
+								   Height="{Binding Height}"
+								   Fill="{Binding Color}" />
+					</DataTemplate>
+				</ItemsControl.Resources>
 			</ItemsControl>
 		</Border>
 		<DockPanel LastChildFill="False"

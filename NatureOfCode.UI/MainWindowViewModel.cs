@@ -67,7 +67,7 @@ namespace NatureOfCode.UI
         internal void Initialize()
         {
             Type sketchType = typeof(Sketch);
-            foreach (Type type in typeof(Example1).Assembly.GetTypes()
+            foreach (Type type in typeof(Example0_1).Assembly.GetTypes()
                 //.Select(a => a.GetTypes())
                 .Where(x => x.IsClass && !x.IsAbstract)
                 .Where(x => x.BaseType == sketchType))

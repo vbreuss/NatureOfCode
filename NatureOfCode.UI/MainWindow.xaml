@@ -7,11 +7,12 @@
         xmlns:local="clr-namespace:NatureOfCode.UI"
         mc:Ignorable="d"
 		Loaded="OnLoaded"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Nature of Code"
+		SizeToContent="WidthAndHeight">
 	<Window.DataContext>
 		<local:MainWindowViewModel/>
 	</Window.DataContext>
-	<StackPanel>
+	<StackPanel Margin="10">
 		<Border VerticalAlignment="Top"
 				BorderThickness="1"
 				BorderBrush="#BBBBBB">
@@ -25,17 +26,28 @@
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemContainerStyle>
 					<Style TargetType="ContentPresenter">
-						<Setter Property="Canvas.Left" Value="{Binding X}"/>
-						<Setter Property="Canvas.Top" Value="{Binding Y}"/>
+						<Setter Property="Canvas.Left"
+								Value="{Binding X}"/>
+						<Setter Property="Canvas.Top"
+								Value="{Binding Y}"/>
 					</Style>
 				</ItemsControl.ItemContainerStyle>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate DataType="{x:Type base:CanvasPoint}">
-						<Ellipse Width="{Binding Radius}" Height="{Binding Radius}" Fill="{Binding Color}" />
+						<Ellipse Width="{Binding Radius}"
+								 Height="{Binding Radius}"
+								 Fill="{Binding Color}" />
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</Border>
-		<ComboBox ItemsSource="{Binding Path=Sketches}" SelectedItem="{Binding Path=Sketch}" />
+		<DockPanel LastChildFill="False"
+				   Margin="10">
+			<TextBlock Text="Examples:"
+					   Margin="0,3,10,0"/>
+			<ComboBox ItemsSource="{Binding Path=Sketches}"
+					  SelectedItem="{Binding Path=Sketch}"
+					  HorizontalAlignment="Left" />
+		</DockPanel>
 	</StackPanel>
 </Window>

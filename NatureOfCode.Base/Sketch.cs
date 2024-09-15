@@ -12,7 +12,13 @@ namespace NatureOfCode.Base
             _canvas = new CanvasDrawer(640, 240, null);
         }
 
+        protected Sketch(string name) : this()
+        {
+            _name = name;
+        }
+
         private ICanvas _canvas;
+        private string? _name;
 
         public ICanvas Canvas
         {
@@ -30,6 +36,11 @@ namespace NatureOfCode.Base
         }
 
         public abstract void Draw();
+
+        public override string ToString()
+        {
+            return _name ?? GetType().Name;
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string? name = null)

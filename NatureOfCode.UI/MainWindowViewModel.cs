@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Threading;
 using NatureOfCode.Base;
 
 namespace NatureOfCode.UI
@@ -50,7 +49,7 @@ namespace NatureOfCode.UI
             {
                 try
                 {
-                    Application.Current.Dispatcher.Invoke(sketch.Draw);
+                    Application.Current?.Dispatcher.Invoke(sketch.Draw);
                 }
                 catch (Exception)
                 {

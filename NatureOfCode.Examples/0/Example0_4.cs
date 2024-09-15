@@ -1,12 +1,8 @@
 ﻿namespace NatureOfCode;
 
+[Sketch(Description = "Example 0.4: A Gaussian Distribution")]
 public class Example0_4 : Sketch
 {
-    public Example0_4()
-        : base("Example 0.4: A Gaussian Distribution")
-    {
-    }
-
     public override void Draw()
     {
         var y = Canvas.Height / 2.0;

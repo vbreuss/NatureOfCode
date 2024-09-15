@@ -12,11 +12,6 @@ namespace NatureOfCode.Base
             _canvas = new CanvasDrawer(640, 240, null);
         }
 
-        protected Sketch(string name) : this()
-        {
-            _name = name;
-        }
-
         private ICanvas _canvas;
         private string? _name;
 
@@ -49,7 +44,20 @@ namespace NatureOfCode.Base
 
         public override string ToString()
         {
-            return _name ?? GetType().Name;
+            _name ??= GetName();
+            return _name;
+        }
+
+        private string GetName()
+        {
+            string? name = null;
+            var attributeType = typeof(SketchAttribute);
+
+            if (Attribute.GetCustomAttribute(this.GetType(), attributeType) is SketchAttribute sketchAttribute)
+            {
+                name = sketchAttribute.Description;
+            }
+            return name ?? GetType().Name;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

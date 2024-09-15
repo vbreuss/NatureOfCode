@@ -3,13 +3,9 @@ using System.Windows.Media.Imaging;
 
 namespace NatureOfCode;
 
+[Sketch(Description = "Example 0.7: Noise 2D")]
 public class Example0_7 : Sketch
 {
-    public Example0_7()
-        : base("Example 0.7: Noise 2D")
-    {
-    }
-
     public override void Setup()
     {
         Canvas.DrawBitmap(bmp =>

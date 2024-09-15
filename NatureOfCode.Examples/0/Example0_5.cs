@@ -1,11 +1,10 @@
 ﻿namespace NatureOfCode;
 
+[Sketch(Description = "Example 0.5: An Accept-Reject Distribution")]
 public class Example0_5 : Sketch
 {
-    public Example0_5()
-        : base("Example 0.5: An Accept-Reject Distribution")
+    public override void Setup()
     {
-        RandomCounts = new int[Total];
         for (int i = 0; i < Total; i++)
         {
             RandomCounts[i] = 0;
@@ -14,7 +13,7 @@ public class Example0_5 : Sketch
 
     const int Total = 20;
     // An array to keep track of how often random numbers are picked
-    int[] RandomCounts;
+    int[] RandomCounts = new int[Total];
 
     public override void Draw()
     {

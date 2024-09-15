@@ -19,7 +19,11 @@ namespace NatureOfCode.UI
         {
             RefreshCommand = new DelegateCommand(_ =>
             {
-                RunSketch(Sketch);
+                var sketch = Sketch;
+                if (sketch != null)
+                {
+                    RunSketch(sketch, true);
+                }
             });
         }
 
@@ -49,12 +53,15 @@ namespace NatureOfCode.UI
 
         public ObservableCollection<Sketch> Sketches { get; } = new ObservableCollection<Sketch>();
 
-        private void RunSketch(Sketch sketch)
+        private void RunSketch(Sketch sketch, bool reset = false)
         {
             _sketchCancellation?.Cancel();
             _sketchCancellation = new CancellationTokenSource();
             var cancellationToken = _sketchCancellation.Token;
-            sketch.Reset();
+            if (reset)
+            {
+                sketch.Reset();
+            }
             _ = Task.Run(() => 
             {
                 try

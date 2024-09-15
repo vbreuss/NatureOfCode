@@ -1,20 +1,19 @@
 ﻿namespace NatureOfCode;
 
+[Sketch(Description = "Example 0.2: A Random-Number Distribution")]
 public class Example0_2 : Sketch
 {
-    public Example0_2()
-        : base("Example 0.2: A Random-Number Distribution")
+    const int Total = 20;
+    // An array to keep track of how often random numbers are picked
+    int[] RandomCounts = new int[Total];
+
+    public override void Setup()
     {
-        RandomCounts = new int[Total];
         for (int i = 0; i < Total; i++)
         {
             RandomCounts[i] = 0;
         }
     }
-
-    const int Total = 20;
-    // An array to keep track of how often random numbers are picked
-    int[] RandomCounts;
 
     public override void Draw()
     {

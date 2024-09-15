@@ -1,15 +1,15 @@
 ﻿namespace NatureOfCode;
 
+[Sketch(Description = "Example 0.3: A Walker That Tends to Move to the Right")]
 public class Example0_3 : Sketch
 {
-    public Example0_3()
-        : base("Example 0.3: A Walker That Tends to Move to the Right")
+    Walker _walker = null!;
+
+    public override void Setup()
     {
         // Creating the Walker object!
         _walker = new Walker(Canvas, Random);
     }
-
-    Walker _walker;
 
     public override void Draw()
     {

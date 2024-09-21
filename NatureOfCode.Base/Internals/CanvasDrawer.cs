@@ -1,9 +1,7 @@
 ﻿using NatureOfCode.Base.UI;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -70,8 +68,15 @@ namespace NatureOfCode.Base.Internals
             {
                 value?.Invoke(writeableBmp);
             }
-            ItemsToDraw.Add(new CanvasBitmap(writeableBmp));
+            var loadedBitmap = _loadedBitmap;
+            _loadedBitmap = new CanvasBitmap(writeableBmp);
+            ItemsToDraw.Add(_loadedBitmap);
+            if (loadedBitmap != null)
+            {
+                ItemsToDraw.Remove(loadedBitmap);
+            }
         }
+        private CanvasBitmap? _loadedBitmap;
 
         public void Reset(Brush? color = null)
         {

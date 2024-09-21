@@ -1,6 +1,9 @@
-﻿namespace NatureOfCode.Base.UI
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace NatureOfCode.Base.UI
 {
-    public class CanvasItem : ICanvasItem
+    public abstract class CanvasItem : ICanvasItem, INotifyPropertyChanged
     {
         public double X { get; }
         public double Y { get; }
@@ -8,6 +11,12 @@
         {
             X = x;
             Y = y;
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

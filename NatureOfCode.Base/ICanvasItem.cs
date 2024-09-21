@@ -2,7 +2,8 @@
 {
     public interface ICanvasItem
     {
-        double X { get; }
-        double Y { get; }
+        double Left { get; }
+        double Top { get; }
+        double Opacity { get; }
     }
 }

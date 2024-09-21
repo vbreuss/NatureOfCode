@@ -1,18 +1,22 @@
-﻿using System.Windows.Media;
+﻿using System.Security.Permissions;
+using System.Windows.Media;
 
 namespace NatureOfCode.Base.UI
 {
     public class CanvasCircle : CanvasItem
     {
-        public CanvasCircle(double x, double y, double radius = 1.0, Brush? color = null, double opacity = 1.0) : base(x, y)
+        public CanvasCircle(double x, double y, double radius = 1.0, Brush? color = null, double opacity = 1.0) : base(x - radius, y - radius, opacity)
         {
+            X = x;
+            Y = y;
             Radius = radius;
             Color = color ?? new SolidColorBrush(Colors.Black);
-            Opacity = opacity;
         }
 
+        public double X { get; }
+        public double Y { get; }
         public double Radius { get; }
-        public double Opacity { get; }
+        public double Diameter => Radius * 2.0;
         public Brush Color { get; }
     }
 }

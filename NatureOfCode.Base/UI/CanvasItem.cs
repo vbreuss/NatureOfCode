@@ -5,12 +5,14 @@ namespace NatureOfCode.Base.UI
 {
     public abstract class CanvasItem : ICanvasItem, INotifyPropertyChanged
     {
-        public double X { get; }
-        public double Y { get; }
-        public CanvasItem(double x, double y)
+        public double Left { get; }
+        public double Top { get; }
+        public double Opacity { get; }
+        public CanvasItem(double left, double top, double opacity = 1.0)
         {
-            X = x;
-            Y = y;
+            Left = left;
+            Top = top;
+            Opacity = opacity;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

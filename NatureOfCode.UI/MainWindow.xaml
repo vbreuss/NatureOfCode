@@ -27,23 +27,23 @@
 				<ItemsControl.ItemContainerStyle>
 					<Style TargetType="ContentPresenter">
 						<Setter Property="Canvas.Left"
-								Value="{Binding X}"/>
+								Value="{Binding Left}"/>
 						<Setter Property="Canvas.Top"
-								Value="{Binding Y}"/>
+								Value="{Binding Top}"/>
+						<Setter Property="Opacity"
+								Value="{Binding Opacity}"/>
 					</Style>
 				</ItemsControl.ItemContainerStyle>
 				<ItemsControl.Resources>
 					<DataTemplate DataType="{x:Type base:CanvasCircle}">
-						<Ellipse Width="{Binding Radius}"
-								 Height="{Binding Radius}"
-								 Fill="{Binding Color}"
-								 Opacity="{Binding Opacity}" />
+						<Ellipse Width="{Binding Diameter}"
+								 Height="{Binding Diameter}"
+								 Fill="{Binding Color}" />
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type base:CanvasRectangle}">
 						<Rectangle Width="{Binding Width}"
 								   Height="{Binding Height}"
-								   Fill="{Binding Color}"
-								   Opacity="{Binding Opacity}" />
+								   Fill="{Binding Color}" />
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type base:CanvasBitmap}">
 						<Image Source="{Binding Source}" />

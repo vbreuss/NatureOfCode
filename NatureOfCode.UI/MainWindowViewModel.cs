@@ -11,7 +11,7 @@ namespace NatureOfCode.UI
     {
         private Sketch? _sketch;
         private CancellationTokenSource? _sketchCancellation;
-        private int delay = 50;
+        private int delay = 20;
 
         public ICommand RefreshCommand { get; }
 

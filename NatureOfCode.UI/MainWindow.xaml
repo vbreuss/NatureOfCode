@@ -16,12 +16,14 @@
 		<Border VerticalAlignment="Top"
 				BorderThickness="1"
 				BorderBrush="#BBBBBB">
-			<ItemsControl Width="{Binding Path=Sketch.Canvas.Width}"
+			<ItemsControl x:Name="canvasControl"
+						  Width="{Binding Path=Sketch.Canvas.Width}"
 						  Height="{Binding Path=Sketch.Canvas.Height}"
 						  ItemsSource="{Binding Path=Sketch.Canvas.ItemsToDraw}">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<Canvas Background="{Binding Path=Sketch.Canvas.Background}" ClipToBounds="True" />
+						<Canvas Background="{Binding Path=Sketch.Canvas.Background}"
+								ClipToBounds="True" />
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemContainerStyle>
@@ -46,6 +48,14 @@
 						<Rectangle Width="{Binding Width}"
 								   Height="{Binding Height}"
 								   Fill="{Binding Color}" />
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type base:CanvasLine}">
+						<Line X1="0"
+							  X2="{Binding X2}"
+							  Y1="0"
+							  Y2="{Binding Y2}"
+							  Stroke="{Binding Color}"
+							  StrokeThickness="{Binding Thickness}"/>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type base:CanvasBitmap}">
 						<Image Source="{Binding Source}" />

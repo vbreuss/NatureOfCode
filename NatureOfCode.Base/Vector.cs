@@ -73,5 +73,10 @@ namespace NatureOfCode.Base
         {
             return Math.Sqrt(x * x + y * y + z * z);
         }
+
+        public override string ToString()
+        {
+            return $"({X}, {Y}, {Z})";
+        }
     }
 }

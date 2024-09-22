@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using NatureOfCode.Base.Internals;
 
@@ -7,17 +10,13 @@ namespace NatureOfCode.Base
 {
     public abstract class Sketch : INotifyPropertyChanged
     {
-        protected Sketch()
-        {
-            _canvas = new CanvasDrawer(640, 240, null);
-        }
-
-        private ICanvas _canvas;
+        private ICanvas? _canvas;
+        private Control? _canvasControl;
         private string? _name;
 
         public ICanvas Canvas
         {
-            get => _canvas;
+            get => _canvas ?? throw new Exception("The sketch is not yet initialized");
             private set
             {
                 _canvas = value;
@@ -36,6 +35,30 @@ namespace NatureOfCode.Base
         {
             PerlinNoise.Reset();
             Canvas = new CanvasDrawer(640, 240, null);
+        }
+
+        public void Initialize(Control canvasControl)
+        {
+            if (_canvasControl == null)
+            {
+                _canvasControl = canvasControl;
+                _canvas = new CanvasDrawer(640, 240, null);
+            }
+        }
+
+        private Vector _previousMousePosition = new Vector(0.0, 0.0);
+        public Vector GetMousePosition()
+        {
+            try
+            {
+                if (_canvasControl.IsMouseOver)
+                {
+                    var mousePosition = Mouse.GetPosition(_canvasControl);
+                    _previousMousePosition = new Vector(mousePosition.X, mousePosition.Y);
+                }
+            }
+            catch (Exception) { }
+            return _previousMousePosition;
         }
 
         public virtual void Setup() { }

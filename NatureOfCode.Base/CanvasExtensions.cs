@@ -12,5 +12,13 @@ namespace NatureOfCode.Base
                 borderColor == null ? null : new SolidColorBrush(borderColor.Value),
                 borderThickness, opacity);
         }
+
+        public static IDrawnElement<CanvasLine> DrawLine(this ICanvas canvas, double x, double y, double left, double top, Color? color = null, double thickness = 1.0, double opacity = 1.0)
+        {
+            return canvas.DrawLine(x, y, left, top,
+                color == null ? null : new SolidColorBrush(color.Value),
+                thickness,
+                opacity);
+        }
     }
 }

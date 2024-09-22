@@ -66,6 +66,13 @@ namespace NatureOfCode.Base.Internals
             return returnValue;
         }
 
+        public IDrawnElement<CanvasLine> DrawLine(double x, double y, double left, double top, Brush? color = null, double thickness = 1, double opacity = 1)
+        {
+            var returnValue = new DrawnElement<CanvasLine>(this, new CanvasLine(x, y, left, top, color, thickness, opacity));
+            ItemsToDraw.Add(returnValue.Item);
+            return returnValue;
+        }
+
         public IDrawnElement<CanvasBitmap> DrawBitmap(Action<WriteableBitmap> value)
         {
             WriteableBitmap writeableBmp = BitmapFactory.New((int)Width, (int)Height);

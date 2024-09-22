@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using NatureOfCode.Base;
 
@@ -97,7 +98,7 @@ namespace NatureOfCode.UI
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        internal void Initialize()
+        internal void Initialize(Control canvasControl)
         {
             Type sketchType = typeof(Sketch);
             foreach (Type type in typeof(Example0_1).Assembly.GetTypes()
@@ -110,6 +111,7 @@ namespace NatureOfCode.UI
                     Sketch? sketch = (Sketch?)Activator.CreateInstance(type);
                     if (sketch != null)
                     {
+                        sketch.Initialize(canvasControl);
                         Sketches.Add(sketch);
                     }
                 }

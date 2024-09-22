@@ -16,6 +16,7 @@ namespace NatureOfCode.Base
 
         IDrawnElement<CanvasCircle> DrawCircle(double x, double y, double radius = 1.0, Brush? color = null, Brush? borderColor = null, double borderThickness = 0.0, double opacity = 1.0);
         IDrawnElement<CanvasRectangle> DrawRectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0);
+        IDrawnElement<CanvasLine> DrawLine(double x, double y, double left, double top, Brush? color = null, double thickness = 1.0, double opacity = 1.0);
         IDrawnElement<CanvasBitmap> DrawBitmap(Action<WriteableBitmap> value);
     }
 }

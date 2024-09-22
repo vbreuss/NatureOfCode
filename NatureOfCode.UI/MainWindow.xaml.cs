@@ -17,7 +17,7 @@ namespace NatureOfCode
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
-                viewModel.Initialize();
+                viewModel.Initialize(this.canvasControl);
             }
         }
     }

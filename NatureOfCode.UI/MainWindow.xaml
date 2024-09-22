@@ -38,7 +38,9 @@
 					<DataTemplate DataType="{x:Type base:CanvasCircle}">
 						<Ellipse Width="{Binding Diameter}"
 								 Height="{Binding Diameter}"
-								 Fill="{Binding Color}" />
+								 Fill="{Binding FillColor}"
+								 Stroke="{Binding BorderColor}"
+								 StrokeThickness="{Binding BorderThickness}"/>
 					</DataTemplate>
 					<DataTemplate DataType="{x:Type base:CanvasRectangle}">
 						<Rectangle Width="{Binding Width}"

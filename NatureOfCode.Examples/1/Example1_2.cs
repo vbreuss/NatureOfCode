@@ -1,4 +1,6 @@
-﻿namespace NatureOfCode;
+﻿using System.Windows.Media;
+
+namespace NatureOfCode;
 
 [Sketch(Description = "Example 1.2: Bouncing Ball with Vectors!")]
 public class Example1_2 : Sketch
@@ -8,8 +10,6 @@ public class Example1_2 : Sketch
 
     public override void Draw()
     {
-        Canvas.Reset();
-
         Position = Position + Velocity;
         if (Position.X > Canvas.Width || Position.X < 0)
         {
@@ -20,6 +20,7 @@ public class Example1_2 : Sketch
             Velocity.Y = Velocity.Y * -1.0;
         }
 
-        Canvas.DrawCircle(Position.X, Position.Y, 48);
+        Canvas.DrawCircle(Position.X, Position.Y, 48)
+            .WithAnimation(Animation.FadeOut(1));
     }
 }

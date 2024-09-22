@@ -82,6 +82,7 @@ namespace NatureOfCode.UI
                 try
                 {
                     Application.Current?.Dispatcher.Invoke(sketch.Draw);
+                    Application.Current?.Dispatcher.Invoke(sketch.Canvas.Animate);
                 }
                 catch (Exception)
                 {

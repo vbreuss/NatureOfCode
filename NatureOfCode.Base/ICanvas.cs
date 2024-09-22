@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using NatureOfCode.Base.UI;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace NatureOfCode.Base
@@ -11,8 +12,10 @@ namespace NatureOfCode.Base
 
         void Reset(Brush? color = null);
 
-        void DrawCircle(double x, double y, double radius = 1.0, Brush? color = null, double opacity = 1.0);
-        void DrawRectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0);
-        void DrawBitmap(Action<WriteableBitmap> value);
+        void Animate();
+
+        IDrawnElement<CanvasCircle> DrawCircle(double x, double y, double radius = 1.0, Brush? color = null, Brush? borderColor = null, double borderThickness = 0.0, double opacity = 1.0);
+        IDrawnElement<CanvasRectangle> DrawRectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0);
+        IDrawnElement<CanvasBitmap> DrawBitmap(Action<WriteableBitmap> value);
     }
 }

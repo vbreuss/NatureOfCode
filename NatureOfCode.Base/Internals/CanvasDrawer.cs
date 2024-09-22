@@ -1,4 +1,5 @@
 ﻿using NatureOfCode.Base.UI;
+using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -51,17 +52,21 @@ namespace NatureOfCode.Base.Internals
             }
         }
 
-        public void DrawCircle(double x, double y, double radius = 1.0, Brush? color = null, double opacity = 1.0)
+        public IDrawnElement<CanvasCircle> DrawCircle(double x, double y, double radius = 1.0, Brush? color = null, Brush? borderColor = null, double borderThickness = 0.0, double opacity = 1.0)
         {
-            ItemsToDraw.Add(new CanvasCircle(x, y, radius, color, opacity));
+            var returnValue = new DrawnElement<CanvasCircle>(this, new CanvasCircle(x, y, radius, color, borderColor, borderThickness, opacity));
+            ItemsToDraw.Add(returnValue.Item);
+            return returnValue;
         }
 
-        public void DrawRectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0)
+        public IDrawnElement<CanvasRectangle> DrawRectangle(double x, double y, double width, double height, Brush? color = null, double opacity = 1.0)
         {
-            ItemsToDraw.Add(new CanvasRectangle(x, y, width, height, color, opacity));
+            var returnValue = new DrawnElement<CanvasRectangle>(this, new CanvasRectangle(x, y, width, height, color, opacity));
+            ItemsToDraw.Add(returnValue.Item);
+            return returnValue;
         }
 
-        public void DrawBitmap(Action<WriteableBitmap> value)
+        public IDrawnElement<CanvasBitmap> DrawBitmap(Action<WriteableBitmap> value)
         {
             WriteableBitmap writeableBmp = BitmapFactory.New((int)Width, (int)Height);
             using (writeableBmp.GetBitmapContext())
@@ -69,12 +74,14 @@ namespace NatureOfCode.Base.Internals
                 value?.Invoke(writeableBmp);
             }
             var loadedBitmap = _loadedBitmap;
-            _loadedBitmap = new CanvasBitmap(writeableBmp);
+            var returnValue = new DrawnElement<CanvasBitmap>(this, new CanvasBitmap(writeableBmp));
+            _loadedBitmap = returnValue.Item;
             ItemsToDraw.Add(_loadedBitmap);
             if (loadedBitmap != null)
             {
                 ItemsToDraw.Remove(loadedBitmap);
             }
+            return returnValue;
         }
         private CanvasBitmap? _loadedBitmap;
 
@@ -91,6 +98,36 @@ namespace NatureOfCode.Base.Internals
         private void OnPropertyChanged([CallerMemberName] string? name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        internal void StartAnimation<TItem>(DrawnElement<TItem> element, IAnimation<TItem> animation) where TItem : CanvasItem
+        {
+            Func<CanvasItem, AnimationResult> func = e => animation.Animate((TItem)e);
+            _animations.AddOrUpdate(element.Item, _ => func, (_,_) => func);
+        }
+
+        private ConcurrentDictionary<CanvasItem, Func<CanvasItem, AnimationResult>> _animations = new();
+
+        public void Animate()
+        {
+            foreach (var animation in _animations)
+            {
+                var result = animation.Value.Invoke(animation.Key);
+                switch (result)
+                {
+                    case AnimationResult.StopAnimation:
+                    {
+                        _animations.TryRemove(animation.Key, out _);
+                            break;
+                        }
+                    case AnimationResult.StopAnimationAndRemoveItem:
+                        {
+                            _animations.TryRemove(animation.Key, out _);
+                            ItemsToDraw.Remove(animation.Key);
+                            break;
+                        }
+                }
+            }
         }
     }
 }

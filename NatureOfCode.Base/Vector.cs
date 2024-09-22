@@ -49,6 +49,15 @@ namespace NatureOfCode.Base
             Z /= scalar;
         }
 
+        public void Limit(double limit)
+        {
+            if (Magnitude > limit)
+            {
+                Normalize();
+                MultiplyWith(limit);
+            }
+        }
+
         public static Vector operator +(Vector v1, Vector v2)
         {
             return new Vector(v1.X + v2.X, v1.Y + v2.Y, v1.Z + v2.Z);

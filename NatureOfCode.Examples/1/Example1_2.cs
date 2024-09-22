@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace NatureOfCode;
+﻿namespace NatureOfCode;
 
 [Sketch(Description = "Example 1.2: Bouncing Ball with Vectors!")]
 public class Example1_2 : Sketch

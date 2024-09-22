@@ -13,6 +13,13 @@ namespace NatureOfCode.Base
                 borderThickness, opacity);
         }
 
+        public static IDrawnElement<CanvasRectangle> DrawRectangle(this ICanvas canvas, double x, double y, double width, double height, Color? color = null, double opacity = 1.0)
+        {
+            return canvas.DrawRectangle(x, y, width, height,
+                color == null ? null : new SolidColorBrush(color.Value),
+                opacity);
+        }
+
         public static IDrawnElement<CanvasLine> DrawLine(this ICanvas canvas, double x, double y, double left, double top, Color? color = null, double thickness = 1.0, double opacity = 1.0)
         {
             return canvas.DrawLine(x, y, left, top,

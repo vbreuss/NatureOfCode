@@ -1,14 +1,8 @@
-﻿using System.Windows.Input;
-using System.Windows.Media;
-
-namespace NatureOfCode;
+﻿namespace NatureOfCode;
 
 [Sketch(Description = "Example 1.3: Vector Subtraction")]
 public class Example1_3 : Sketch
 {
-    Vector Position = new Vector(100.0, 100.0);
-    Vector Velocity = new Vector(2.5, 2.0);
-
     public override void Draw()
     {
         Canvas.Reset();

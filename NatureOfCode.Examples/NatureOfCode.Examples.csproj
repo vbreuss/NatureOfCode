@@ -9,6 +9,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\NatureOfCode.Base\NatureOfCode.Base.csproj" />
 		<Using Include="NatureOfCode.Base" />
+		<Using Include="System.Windows.Media" />
 	</ItemGroup>
 
 </Project>

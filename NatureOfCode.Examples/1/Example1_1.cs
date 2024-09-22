@@ -22,6 +22,6 @@ public class Example1_1 : Sketch
             YSpeed = YSpeed * -1.0;
         }
 
-        Canvas.DrawCircle(X, Y, 48);
+        Canvas.DrawCircle(X, Y, 24);
     }
 }

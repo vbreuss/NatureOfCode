@@ -1,5 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-namespace NatureOfCode.Base
+﻿namespace NatureOfCode.Base
 {
     public interface IRandom
     {
@@ -7,7 +6,7 @@ namespace NatureOfCode.Base
         /// Returns a random floating-point number that is greater than or equal to 0.0, and less than 1.0.
         /// </summary>
         double Next();
-
+        
         /// <summary>
         /// Returns a non-negative random integer that is less than the specified <paramref name="maximum" />.
         /// </summary>

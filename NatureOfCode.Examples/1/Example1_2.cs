@@ -18,7 +18,7 @@ public class Example1_2 : Sketch
             Velocity.Y = Velocity.Y * -1.0;
         }
 
-        Canvas.DrawCircle(Position.X, Position.Y, 48)
+        Canvas.DrawCircle(Position.X, Position.Y, 24)
             .WithAnimation(Animation.FadeOut(1));
     }
 }
